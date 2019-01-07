@@ -1,0 +1,17 @@
+#!/bin/bash
+
+FILE=~/.crontab.md5
+if [ -f $FILE ]; then
+	if [ "`cat $FILE`" = "`md5sum /etc/crontab`" ]; then
+		echo "File hasn't been modified since last check"
+	else
+		echo "/etc/crontab has been modified" | mail -s "File Modification" root
+		echo "A mail has been sent to root"
+		md5sum /etc/crontab > $FILE
+		echo "Updated .md5 file"
+	fi
+else
+	md5sum /etc/crontab > $FILE
+	echo "Creating .md5 file"
+fi
+#Edit /etc/crontab and add "0 0 * * * /Path_To_Script\" to create a task every day at Midnight.

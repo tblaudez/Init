@@ -1,0 +1,4 @@
+#!/bin/bash
+
+apt-get update && apt-get upgrade >> /var/log/update_script.log
+#edit /etc/crontab and add "0 4 * * 1 /Path_To_Script\" at the end to run this script every Monday at 4:00 AM.
